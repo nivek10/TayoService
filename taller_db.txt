@@ -1,0 +1,356 @@
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : mysql
+Source Server Version : 50539
+Source Host           : 127.0.0.1:3306
+Source Database       : taller_db
+
+Target Server Type    : MYSQL
+Target Server Version : 50539
+File Encoding         : 65001
+
+Date: 2018-05-10 18:28:28
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for area
+-- ----------------------------
+DROP TABLE IF EXISTS `area`;
+CREATE TABLE `area` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `area` varchar(10) COLLATE utf8_bin NOT NULL,
+  `descripcion` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of area
+-- ----------------------------
+INSERT INTO `area` VALUES ('1', 'Área 1', 'Descripción de Área 1');
+INSERT INTO `area` VALUES ('2', 'Area 2', 'Desc de Area 2w');
+
+-- ----------------------------
+-- Table structure for automobil
+-- ----------------------------
+DROP TABLE IF EXISTS `automobil`;
+CREATE TABLE `automobil` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `cliente` int(6) NOT NULL,
+  `marca` varchar(20) COLLATE utf8_bin NOT NULL,
+  `modelo` varchar(20) COLLATE utf8_bin NOT NULL,
+  `color` varchar(15) COLLATE utf8_bin NOT NULL,
+  `anio` int(4) NOT NULL,
+  `procedencia` varchar(25) COLLATE utf8_bin NOT NULL,
+  `placa` varchar(10) COLLATE utf8_bin NOT NULL,
+  `observaciones` text COLLATE utf8_bin,
+  `tipo` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `kms` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `bastidor` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `motor` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `fecha_compra` date DEFAULT NULL,
+  `localizacion` varchar(300) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of automobil
+-- ----------------------------
+INSERT INTO `automobil` VALUES ('1', '1', 'BMW', '850csi', '1', '1998', 'Alemania', '274NFK', '', null, null, null, null, null, null);
+INSERT INTO `automobil` VALUES ('2', '3', 'Toyota', '2012', 'Negro', '2012', 'Proc', '784-PRD', '', null, null, null, null, null, null);
+INSERT INTO `automobil` VALUES ('3', '3', 'Nisaan', 'MOD-123', 'Blanco', '2010', '', '4567-TFN', '', null, null, null, null, null, null);
+INSERT INTO `automobil` VALUES ('4', '1', 'BMW', 'SPACE', 'Blanco', '2011', '', '5124 NSQ', '', '', '', '', 'Gasolina', '2012-05-04', '');
+
+-- ----------------------------
+-- Table structure for cliente
+-- ----------------------------
+DROP TABLE IF EXISTS `cliente`;
+CREATE TABLE `cliente` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `nombres` varchar(50) COLLATE utf8_bin NOT NULL,
+  `apellidos` varchar(50) COLLATE utf8_bin NOT NULL,
+  `ci` int(10) NOT NULL,
+  `telefono` int(10) NOT NULL,
+  `direccion` varchar(50) COLLATE utf8_bin NOT NULL,
+  `nom_comercial` varchar(300) COLLATE utf8_bin DEFAULT NULL,
+  `nom_fiscal` varchar(300) COLLATE utf8_bin DEFAULT NULL,
+  `cod_postal` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `poblacion` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `provincia` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `pais` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `email` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `web` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of cliente
+-- ----------------------------
+INSERT INTO `cliente` VALUES ('1', 'Sarah', 'Ray', '12345', '70563399', 'Caption Beach #64', '', '', '', '', '', 'Paraguay', 'sarah@ray.com', '');
+INSERT INTO `cliente` VALUES ('3', 'Mariela', 'Vargas', '6657412', '6784125', 'con direccion', null, null, null, null, null, null, null, null);
+
+-- ----------------------------
+-- Table structure for compra_producto
+-- ----------------------------
+DROP TABLE IF EXISTS `compra_producto`;
+CREATE TABLE `compra_producto` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `total` int(6) DEFAULT NULL,
+  `cantidad` int(5) DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `hora` time DEFAULT NULL,
+  `usuario` int(5) DEFAULT NULL,
+  `proveedor` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of compra_producto
+-- ----------------------------
+INSERT INTO `compra_producto` VALUES ('1', null, null, '2018-03-06', '15:44:35', null, '1');
+
+-- ----------------------------
+-- Table structure for compra_reg
+-- ----------------------------
+DROP TABLE IF EXISTS `compra_reg`;
+CREATE TABLE `compra_reg` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `idcompra` int(11) NOT NULL,
+  `producto` int(5) NOT NULL,
+  `total_compra` int(6) NOT NULL,
+  `cantidad` int(5) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of compra_reg
+-- ----------------------------
+INSERT INTO `compra_reg` VALUES ('1', '1', '1', '8', '2');
+INSERT INTO `compra_reg` VALUES ('2', '1', '2', '8', '4');
+
+-- ----------------------------
+-- Table structure for encargado
+-- ----------------------------
+DROP TABLE IF EXISTS `encargado`;
+CREATE TABLE `encargado` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `trabajo` int(6) NOT NULL,
+  `personal` int(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of encargado
+-- ----------------------------
+INSERT INTO `encargado` VALUES ('1', '1', '2');
+INSERT INTO `encargado` VALUES ('2', '1', '3');
+
+-- ----------------------------
+-- Table structure for insumo
+-- ----------------------------
+DROP TABLE IF EXISTS `insumo`;
+CREATE TABLE `insumo` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `tipo` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `familia` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `marca` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  `descripcion_breve` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `description_extensa` text COLLATE utf8_bin,
+  `cod_ticket` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `procedencia` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  `precio` float DEFAULT NULL,
+  `unidades` int(5) DEFAULT NULL,
+  `proveedor` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=COMPACT;
+
+-- ----------------------------
+-- Records of insumo
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for inventario
+-- ----------------------------
+DROP TABLE IF EXISTS `inventario`;
+CREATE TABLE `inventario` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `idauto` int(6) NOT NULL,
+  `partes` int(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of inventario
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for personal
+-- ----------------------------
+DROP TABLE IF EXISTS `personal`;
+CREATE TABLE `personal` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `area` int(6) DEFAULT NULL,
+  `nombres` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `apellidos` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `direccion` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `telefono` int(10) DEFAULT NULL,
+  `ci` varchar(10) COLLATE utf8_bin DEFAULT NULL,
+  `referencias` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `cod_postal` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `poblacion` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `provincia` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `pais` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `email` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `web` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of personal
+-- ----------------------------
+INSERT INTO `personal` VALUES ('1', '0', 'Alejandra', 'Treviño', 'Av 16 de Julio #57 Piso 11', '60427847', '20954368', 'No cuenta con titulo profesional', null, null, null, null, null, null);
+INSERT INTO `personal` VALUES ('2', '1', 'Juan', 'Martinez', 'dom', '712233', '98784', 'sin referencias', null, null, null, null, null, null);
+INSERT INTO `personal` VALUES ('3', '2', 'Marcia', 'Tupa', '', '355178', '644781', 'sin referencias....', '', '', '', 'Bolivia', 'marcia@mail.com', 'marcia.com');
+
+-- ----------------------------
+-- Table structure for producto
+-- ----------------------------
+DROP TABLE IF EXISTS `producto`;
+CREATE TABLE `producto` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `cod_ticket` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `marca` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  `tipo` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `familia` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `procedencia` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  `precio` float DEFAULT NULL,
+  `unidades` int(5) DEFAULT NULL,
+  `foto_producto` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `descripcion_breve` varchar(300) COLLATE utf8_bin DEFAULT NULL,
+  `descripcion_extensa` text COLLATE utf8_bin,
+  `tipo_vehiculo` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `marca_vehiculo` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `modelo_vehiculo` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `kms` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `motor_vehiculo` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `color_vehiculo` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `producto_insumo` tinyint(4) DEFAULT NULL COMMENT 'tipo: 1=producto, 2=insumo',
+  `proveedor` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of producto
+-- ----------------------------
+INSERT INTO `producto` VALUES ('1', null, null, 'Marca 1', 'NS', null, 'Chile', '45.3', '0', null, 'Producto 1', null, null, null, null, null, null, null, null, null);
+INSERT INTO `producto` VALUES ('2', null, null, 'Hondaaa', 'NN', null, 'Japon', '6.7', '4', null, 'Producto 2', null, null, null, null, null, null, null, null, null);
+INSERT INTO `producto` VALUES ('3', 'asdq', '2222', 'qeqeqe', '', '', '', '0', '0', '20180427025133.png', 'sin descripcion', '', '', '', null, '500', '', '', null, '0');
+
+-- ----------------------------
+-- Table structure for proveedor
+-- ----------------------------
+DROP TABLE IF EXISTS `proveedor`;
+CREATE TABLE `proveedor` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) COLLATE utf8_bin NOT NULL,
+  `direccion` varchar(20) COLLATE utf8_bin NOT NULL,
+  `telefono` int(13) NOT NULL,
+  `descripcion` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `nom_comercial` varchar(300) COLLATE utf8_bin DEFAULT NULL,
+  `nom_fiscal` varchar(300) COLLATE utf8_bin DEFAULT NULL,
+  `cod_postal` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `poblacion` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `provincia` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `pais` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `email` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `web` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of proveedor
+-- ----------------------------
+INSERT INTO `proveedor` VALUES ('1', 'Proveedor 1', 'Dir de Proveedor 1', '78421213', 'Sin descripción', null, null, null, null, null, null, null, null);
+INSERT INTO `proveedor` VALUES ('3', 'Proveedor actualizado', 'dir de proveedor ac', '111111', ' sin descripcion', null, null, null, null, null, null, null, null);
+INSERT INTO `proveedor` VALUES ('4', 'Juan Salvatierra', 'dirccion de salva', '7778451', 'sin descripcion', '', '', '', '', '', 'Bolivia', 'sala@tierra.com', 'www.salvatierra.com');
+
+-- ----------------------------
+-- Table structure for trabajo
+-- ----------------------------
+DROP TABLE IF EXISTS `trabajo`;
+CREATE TABLE `trabajo` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `idauto` int(6) NOT NULL,
+  `detalle` varchar(200) COLLATE utf8_bin NOT NULL,
+  `listo` tinyint(1) NOT NULL COMMENT '0=en proceso; 1=finalizado',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of trabajo
+-- ----------------------------
+INSERT INTO `trabajo` VALUES ('1', '4', 'mantenimiento de los frenos', '0');
+
+-- ----------------------------
+-- Table structure for usuario
+-- ----------------------------
+DROP TABLE IF EXISTS `usuario`;
+CREATE TABLE `usuario` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(25) COLLATE utf8_bin DEFAULT NULL,
+  `contrasenia` varchar(65) COLLATE utf8_bin DEFAULT NULL,
+  `privilegios` tinyint(1) DEFAULT NULL COMMENT '1=root; 2=admin; 3=encargado',
+  `personal` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of usuario
+-- ----------------------------
+INSERT INTO `usuario` VALUES ('1', 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918\n', '1', null);
+INSERT INTO `usuario` VALUES ('2', 'admin', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2', '2');
+INSERT INTO `usuario` VALUES ('5', 'uuuu', '2f6662f3d0028d2da73e6d8f5fb992b370e4652f41ab9d005483137c3f84137e', '2', '3');
+
+-- ----------------------------
+-- Table structure for venta_producto
+-- ----------------------------
+DROP TABLE IF EXISTS `venta_producto`;
+CREATE TABLE `venta_producto` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `total` int(6) DEFAULT NULL,
+  `cantidad` int(5) DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `hora` time DEFAULT NULL,
+  `usuario` int(5) DEFAULT NULL,
+  `cliente` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of venta_producto
+-- ----------------------------
+INSERT INTO `venta_producto` VALUES ('1', null, null, '2018-03-06', '15:45:46', null, '3');
+INSERT INTO `venta_producto` VALUES ('2', null, null, '2018-03-06', '15:46:04', null, '3');
+
+-- ----------------------------
+-- Table structure for venta_reg
+-- ----------------------------
+DROP TABLE IF EXISTS `venta_reg`;
+CREATE TABLE `venta_reg` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `idventa` int(6) NOT NULL,
+  `producto` int(6) NOT NULL,
+  `costo` int(8) NOT NULL,
+  `cantidad` int(5) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of venta_reg
+-- ----------------------------
+INSERT INTO `venta_reg` VALUES ('1', '1', '1', '45', '1');
+INSERT INTO `venta_reg` VALUES ('2', '2', '1', '45', '1');
